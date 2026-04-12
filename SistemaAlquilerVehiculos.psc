@@ -37,7 +37,7 @@ Algoritmo SistemaAlquilerVehiculos
             3:
                 DevolverVehiculo(placas, marcas, modelos, estados, numVehiculos)
             4:
-    //            MantenimientoVehiculo(placas, marcas, modelos, estados, numVehiculos)
+                MantenimientoVehiculo(placas, marcas, modelos, estados, numVehiculos)
             5:
                 Escribir "Saliendo..."
             De Otro Modo:
@@ -158,6 +158,45 @@ SubProceso DevolverVehiculo(placas, marcas, modelos, estados, numVehiculos)
             Escribir "DEVOLUCION EXITOSA! Vehiculo ", placas[id], " ahora esta DISPONIBLE"
         Sino
             Escribir "ERROR: Este vehiculo no esta alquilado. Estado: ", estados[id]
+        FinSi
+    Sino
+        Escribir "ERROR: ID no existe"
+    FinSi
+    
+    Esperar Tecla
+FinSubProceso
+
+// ---------------------------------------------------
+// MODULO 4: Enviar a mantenimiento
+// ---------------------------------------------------
+
+SubProceso MantenimientoVehiculo(placas, marcas, modelos, estados, numVehiculos)
+    Definir id, i Como Entero
+    
+    Limpiar Pantalla
+    Escribir "========== ENVIAR A MANTENIMIENTO =========="
+    Escribir ""
+    Escribir "Vehiculos disponibles:"
+    Escribir "ID | Placa      | Marca    | Modelo"
+    Escribir "----------------------------------------"
+    
+    Para i <- 1 Hasta numVehiculos Con Paso 1 Hacer
+        Si estados[i] = "Disponible" Entonces
+            Escribir i, "   | ", placas[i], " | ", marcas[i], " | ", modelos[i]
+        FinSi
+    FinPara
+    
+    Escribir ""
+    Escribir "ID del vehiculo: "
+    Leer id
+    
+    Si id >= 1 Y id <= numVehiculos Entonces
+        Si estados[id] = "Disponible" Entonces
+            estados[id] <- "Mantenimiento"
+            Escribir ""
+            Escribir "VEHICULO ENVIADO A MANTENIMIENTO! ", placas[id], " ahora esta EN MANTENIMIENTO"
+        Sino
+            Escribir "ERROR: Solo vehiculos DISPONIBLES van a mantenimiento. Estado: ", estados[id]
         FinSi
     Sino
         Escribir "ERROR: ID no existe"
