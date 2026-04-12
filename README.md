@@ -19,5 +19,19 @@ Menu principal con opciones 1 a 5 y 5 vehiculos de ejemplo cargados.
 4. Enviar a mantenimiento
 5. Salir
 
-## Nota
-Aun no funcionan las opciones, solo estructura base.
+## Funciones ya implementadas
+
+### 1. Ver catalogo
+Muestra todos los vehiculos con placa, marca, modelo y estado. Al final muestra cuantos hay disponibles, alquilados y en mantenimiento.
+
+### 2. Reservar vehiculo
+Lista solo los vehiculos disponibles. Al elegir un ID valido, cambia su estado a "Alquilado".
+
+### 3. Devolver vehiculo
+Lista solo los vehiculos alquilados. Al elegir un ID valido, cambia su estado a "Disponible".
+
+## Pendiente
+- Opcion 4: Enviar a mantenimiento
+
+## Como usarlo
+El sistema te pide el ID del vehiculo (el numero que ves en la lista). Valida que el ID exista y que el estado sea el correcto para cada accion.
