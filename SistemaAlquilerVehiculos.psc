@@ -47,3 +47,121 @@ Algoritmo SistemaAlquilerVehiculos
     Hasta Que opcion = 5
     
 FinAlgoritmo
+
+// ---------------------------------------------------
+// MODULO 1: Ver catalogo de vehiculos
+// ---------------------------------------------------
+
+SubProceso VerCatalogo(placas, marcas, modelos, estados, numVehiculos)
+    Definir i, contDisp, contAlq, contMant Como Entero
+    
+    contDisp <- 0
+    contAlq <- 0
+    contMant <- 0
+    
+    Limpiar Pantalla
+    Escribir "========== CATALOGO DE VEHICULOS =========="
+    Escribir ""
+    Escribir "No. | Placa      | Marca    | Modelo    | Estado"
+    Escribir "-----------------------------------------------"
+    
+    Para i <- 1 Hasta numVehiculos Con Paso 1 Hacer
+        Escribir i, "   | ", placas[i], " | ", marcas[i], " | ", modelos[i], " | ", estados[i]
+        
+        Si estados[i] = "Disponible" Entonces
+            contDisp <- contDisp + 1
+        Sino
+            Si estados[i] = "Alquilado" Entonces
+                contAlq <- contAlq + 1
+            Sino
+                Si estados[i] = "Mantenimiento" Entonces
+                    contMant <- contMant + 1
+                FinSi
+            FinSi
+        FinSi
+    FinPara
+    
+    Escribir "-----------------------------------------------"
+    Escribir "Resumen - Disponibles: ", contDisp, " | Alquilados: ", contAlq, " | Mantenimiento: ", contMant
+    Escribir ""
+    Escribir "Presione una tecla..."
+    Esperar Tecla
+FinSubProceso
+
+// ---------------------------------------------------
+// MODULO 2: Reservar un vehiculo
+// ---------------------------------------------------
+
+SubProceso ReservarVehiculo(placas, marcas, modelos, estados, numVehiculos)
+    Definir id, i Como Entero
+    
+    Limpiar Pantalla
+    Escribir "========== RESERVAR VEHICULO =========="
+    Escribir ""
+    Escribir "Vehiculos disponibles:"
+    Escribir "ID | Placa      | Marca    | Modelo"
+    Escribir "---------------------------------"
+    
+    Para i <- 1 Hasta numVehiculos Con Paso 1 Hacer
+        Si estados[i] = "Disponible" Entonces
+            Escribir i, "   | ", placas[i], " | ", marcas[i], " | ", modelos[i]
+        FinSi
+    FinPara
+    
+    Escribir ""
+    Escribir "ID del vehiculo: "
+    Leer id
+    
+    Si id >= 1 Y id <= numVehiculos Entonces
+        Si estados[id] = "Disponible" Entonces
+            estados[id] <- "Alquilado"
+            Escribir ""
+            Escribir "RESERVA EXITOSA! Vehiculo ", placas[id], " ahora esta ALQUILADO"
+        Sino
+            Escribir "ERROR: Vehiculo no disponible. Estado: ", estados[id]
+        FinSi
+    Sino
+        Escribir "ERROR: ID no existe"
+    FinSi
+    
+    Esperar Tecla
+FinSubProceso
+
+// ---------------------------------------------------
+// MODULO 3: Devolver un vehiculo
+// ---------------------------------------------------
+
+SubProceso DevolverVehiculo(placas, marcas, modelos, estados, numVehiculos)
+    Definir id, i Como Entero
+    
+    Limpiar Pantalla
+    Escribir "========== DEVOLUCION DE VEHICULO =========="
+    Escribir ""
+    Escribir "Vehiculos alquilados:"
+    Escribir "ID | Placa      | Marca    | Modelo"
+    Escribir "-----------------------------------"
+    
+    Para i <- 1 Hasta numVehiculos Con Paso 1 Hacer
+        Si estados[i] = "Alquilado" Entonces
+            Escribir i, "   | ", placas[i], " | ", marcas[i], " | ", modelos[i]
+        FinSi
+    FinPara
+    
+    Escribir ""
+    Escribir "ID del vehiculo a devolver: "
+    Leer id
+    
+    Si id >= 1 Y id <= numVehiculos Entonces
+        Si estados[id] = "Alquilado" Entonces
+            estados[id] <- "Disponible"
+            Escribir ""
+            Escribir "DEVOLUCION EXITOSA! Vehiculo ", placas[id], " ahora esta DISPONIBLE"
+        Sino
+            Escribir "ERROR: Este vehiculo no esta alquilado. Estado: ", estados[id]
+        FinSi
+    Sino
+        Escribir "ERROR: ID no existe"
+    FinSi
+    
+    Esperar Tecla
+FinSubProceso
