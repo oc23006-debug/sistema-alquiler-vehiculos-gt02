@@ -33,5 +33,8 @@ Lista solo los vehiculos alquilados. Al elegir un ID valido, cambia su estado a 
 ## Pendiente
 - Opcion 4: Enviar a mantenimiento
 
+## Nota
+Ahora si funcionan las opciones que se agragaron recientemente, habia olvidado quitar las "//"
+
 ## Como usarlo
 El sistema te pide el ID del vehiculo (el numero que ves en la lista). Valida que el ID exista y que el estado sea el correcto para cada accion.
