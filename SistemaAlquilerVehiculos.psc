@@ -31,11 +31,11 @@ Algoritmo SistemaAlquilerVehiculos
         
         Segun opcion Hacer
             1:
-    //            VerCatalogo(placas, marcas, modelos, estados, numVehiculos)
+                VerCatalogo(placas, marcas, modelos, estados, numVehiculos)
             2:
-    //            ReservarVehiculo(placas, marcas, modelos, estados, numVehiculos)
+                ReservarVehiculo(placas, marcas, modelos, estados, numVehiculos)
             3:
-    //            DevolverVehiculo(placas, marcas, modelos, estados, numVehiculos)
+                DevolverVehiculo(placas, marcas, modelos, estados, numVehiculos)
             4:
     //            MantenimientoVehiculo(placas, marcas, modelos, estados, numVehiculos)
             5:
