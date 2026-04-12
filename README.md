@@ -1,7 +1,7 @@
 # Sistema de Alquiler de Vehiculos
 
 ## Estado actual
-Menu principal con opciones 1 a 5 y 5 vehiculos de ejemplo cargados.
+Sistema completo. Menu principal con opciones 1 a 5 y 5 vehiculos de ejemplo cargados.
 
 ## Vehiculos de ejemplo
 | # | Placa | Marca | Modelo | Estado |
@@ -19,7 +19,7 @@ Menu principal con opciones 1 a 5 y 5 vehiculos de ejemplo cargados.
 4. Enviar a mantenimiento
 5. Salir
 
-## Funciones ya implementadas
+## Todas las funciones implementadas
 
 ### 1. Ver catalogo
 Muestra todos los vehiculos con placa, marca, modelo y estado. Al final muestra cuantos hay disponibles, alquilados y en mantenimiento.
@@ -30,11 +30,17 @@ Lista solo los vehiculos disponibles. Al elegir un ID valido, cambia su estado a
 ### 3. Devolver vehiculo
 Lista solo los vehiculos alquilados. Al elegir un ID valido, cambia su estado a "Disponible".
 
-## Pendiente
-- Opcion 4: Enviar a mantenimiento
+### 4. Enviar a mantenimiento
+Lista solo los vehiculos disponibles. Al elegir un ID valido, cambia su estado a "Mantenimiento".
 
-## Nota
-Ahora si funcionan las opciones que se agragaron recientemente, habia olvidado quitar las "//"
+### 5. Salir
+Cierra el sistema.
 
-## Como usarlo
-El sistema te pide el ID del vehiculo (el numero que ves en la lista). Valida que el ID exista y que el estado sea el correcto para cada accion.
+## Detalles tecnicos
+- Capacidad maxima: 20 vehiculos
+- Estados posibles: Disponible, Alquilado, Mantenimiento
+- Datos guardados en memoria mientras el programa corre
+- 5 vehiculos de ejemplo para probar
+
+## Como ejecutar
+El pseudocodigo fue escrito en PSeint, puede copiarlo desde el mismo GitHub o puede descargar el archivo .psc y ejecutarlo
