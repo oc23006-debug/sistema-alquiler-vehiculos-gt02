@@ -1,6 +1,6 @@
 # Sistema de Alquiler de Vehiculos - Grupo GT02
 # Integrante: Marco Josue Orellana Cortez
-# Entrega 2 - Python - Parte 2 (Lectura y Creacion)
+# Entrega 2 - Python - Parte 3 (Actualizacion)
 
 def ver_catalogo(placas, marcas, modelos, estados):
     cont_disp = 0
@@ -40,7 +40,6 @@ def agregar_vehiculo(placas, marcas, modelos, estados):
     nueva_marca = input("Marca: ")
     nuevo_modelo = input("Modelo: ")
     
-    # Verificar si la placa ya existe
     for placa in placas:
         if placa.upper() == nueva_placa.upper():
             print("ERROR: Ya existe un vehiculo con esa placa")
@@ -54,6 +53,105 @@ def agregar_vehiculo(placas, marcas, modelos, estados):
     
     print(f"\nVEHICULO AGREGADO EXITOSAMENTE! {nueva_placa} - {nueva_marca} {nuevo_modelo}")
     input("Presione Enter para continuar...")
+
+def reservar_vehiculo(placas, marcas, modelos, estados):
+    print("\n========== RESERVAR VEHICULO ==========")
+    print("")
+    print("Vehiculos disponibles:")
+    print("ID | Placa      | Marca    | Modelo")
+    print("---------------------------------")
+    
+    disponibles = []
+    for i in range(len(estados)):
+        if estados[i] == "Disponible":
+            print(f"{i+1}   | {placas[i]} | {marcas[i]} | {modelos[i]}")
+            disponibles.append(i)
+    
+    if len(disponibles) == 0:
+        print("No hay vehiculos disponibles")
+        input("Presione Enter para continuar...")
+        return
+    
+    try:
+        id_vehiculo = int(input("\nID del vehiculo: ")) - 1
+        if 0 <= id_vehiculo < len(estados):
+            if estados[id_vehiculo] == "Disponible":
+                estados[id_vehiculo] = "Alquilado"
+                print(f"\nRESERVA EXITOSA! Vehiculo {placas[id_vehiculo]} ahora esta ALQUILADO")
+            else:
+                print(f"ERROR: Vehiculo no disponible. Estado: {estados[id_vehiculo]}")
+        else:
+            print("ERROR: ID no existe")
+    except ValueError:
+        print("ERROR: Ingrese un numero valido")
+    
+    input("\nPresione Enter para continuar...")
+
+def devolver_vehiculo(placas, marcas, modelos, estados):
+    print("\n========== DEVOLUCION DE VEHICULO ==========")
+    print("")
+    print("Vehiculos alquilados:")
+    print("ID | Placa      | Marca    | Modelo")
+    print("-----------------------------------")
+    
+    alquilados = []
+    for i in range(len(estados)):
+        if estados[i] == "Alquilado":
+            print(f"{i+1}   | {placas[i]} | {marcas[i]} | {modelos[i]}")
+            alquilados.append(i)
+    
+    if len(alquilados) == 0:
+        print("No hay vehiculos alquilados")
+        input("Presione Enter para continuar...")
+        return
+    
+    try:
+        id_vehiculo = int(input("\nID del vehiculo a devolver: ")) - 1
+        if 0 <= id_vehiculo < len(estados):
+            if estados[id_vehiculo] == "Alquilado":
+                estados[id_vehiculo] = "Disponible"
+                print(f"\nDEVOLUCION EXITOSA! Vehiculo {placas[id_vehiculo]} ahora esta DISPONIBLE")
+            else:
+                print(f"ERROR: Este vehiculo no esta alquilado. Estado: {estados[id_vehiculo]}")
+        else:
+            print("ERROR: ID no existe")
+    except ValueError:
+        print("ERROR: Ingrese un numero valido")
+    
+    input("\nPresione Enter para continuar...")
+
+def mantenimiento_vehiculo(placas, marcas, modelos, estados):
+    print("\n========== ENVIAR A MANTENIMIENTO ==========")
+    print("")
+    print("Vehiculos disponibles:")
+    print("ID | Placa      | Marca    | Modelo")
+    print("----------------------------------------")
+    
+    disponibles = []
+    for i in range(len(estados)):
+        if estados[i] == "Disponible":
+            print(f"{i+1}   | {placas[i]} | {marcas[i]} | {modelos[i]}")
+            disponibles.append(i)
+    
+    if len(disponibles) == 0:
+        print("No hay vehiculos disponibles para enviar a mantenimiento")
+        input("Presione Enter para continuar...")
+        return
+    
+    try:
+        id_vehiculo = int(input("\nID del vehiculo: ")) - 1
+        if 0 <= id_vehiculo < len(estados):
+            if estados[id_vehiculo] == "Disponible":
+                estados[id_vehiculo] = "Mantenimiento"
+                print(f"\nVEHICULO ENVIADO A MANTENIMIENTO! {placas[id_vehiculo]} ahora esta EN MANTENIMIENTO")
+            else:
+                print(f"ERROR: Solo vehiculos DISPONIBLES van a mantenimiento. Estado: {estados[id_vehiculo]}")
+        else:
+            print("ERROR: ID no existe")
+    except ValueError:
+        print("ERROR: Ingrese un numero valido")
+    
+    input("\nPresione Enter para continuar...")
 
 def main():
     placas = ["P123-ABC", "P456-DEF", "P789-GHI", "P999-JKL", "P111-MNO"]
@@ -77,6 +175,12 @@ def main():
         
         if opcion == "1":
             ver_catalogo(placas, marcas, modelos, estados)
+        elif opcion == "2":
+            reservar_vehiculo(placas, marcas, modelos, estados)
+        elif opcion == "3":
+            devolver_vehiculo(placas, marcas, modelos, estados)
+        elif opcion == "4":
+            mantenimiento_vehiculo(placas, marcas, modelos, estados)
         elif opcion == "5":
             agregar_vehiculo(placas, marcas, modelos, estados)
         elif opcion == "7":
