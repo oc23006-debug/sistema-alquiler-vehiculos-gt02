@@ -26,11 +26,17 @@ Menu principal con opciones 1 a 7 y 5 vehiculos de ejemplo cargados.
 ### 1. Ver catalogo (Lectura)
 Muestra todos los vehiculos con placa, marca, modelo y estado. Al final muestra cuantos hay disponibles, alquilados y en mantenimiento.
 
+### 2. Reservar vehiculo (Actualizacion)
+Lista solo los vehiculos disponibles. Al elegir un ID valido, cambia su estado a "Alquilado".
+
+### 3. Devolver vehiculo (Actualizacion)
+Lista solo los vehiculos alquilados. Al elegir un ID valido, cambia su estado a "Disponible".
+
+### 4. Enviar a mantenimiento (Actualizacion)
+Lista solo los vehiculos disponibles. Al elegir un ID valido, cambia su estado a "Mantenimiento".
+
 ### 5. Agregar vehiculo (Creacion)
 Solicita placa, marca y modelo. Valida que no exista otra placa igual. Limite maximo de 20 vehiculos. El nuevo vehiculo se agrega con estado "Disponible".
 
 ## Pendiente
-- Opcion 2: Reservar vehiculo
-- Opcion 3: Devolver vehiculo
-- Opcion 4: Enviar a mantenimiento
 - Opcion 6: Eliminar vehiculo
