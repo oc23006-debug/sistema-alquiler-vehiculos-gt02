@@ -1,6 +1,6 @@
 # Sistema de Alquiler de Vehiculos - Grupo GT02
 # Integrante: Marco Josue Orellana Cortez
-# Entrega 2 - Python - Parte 3 (Actualizacion)
+# Entrega 2 - Python - Parte Final
 
 def ver_catalogo(placas, marcas, modelos, estados):
     cont_disp = 0
@@ -153,6 +153,41 @@ def mantenimiento_vehiculo(placas, marcas, modelos, estados):
     
     input("\nPresione Enter para continuar...")
 
+def eliminar_vehiculo(placas, marcas, modelos, estados):
+    print("\n========== ELIMINAR VEHICULO ==========")
+    print("")
+    print("Todos los vehiculos:")
+    print("ID | Placa      | Marca    | Modelo    | Estado")
+    print("-----------------------------------------------")
+    
+    for i in range(len(placas)):
+        print(f"{i+1}   | {placas[i]} | {marcas[i]} | {modelos[i]} | {estados[i]}")
+    
+    if len(placas) == 0:
+        print("No hay vehiculos para eliminar")
+        input("Presione Enter para continuar...")
+        return
+    
+    try:
+        id_vehiculo = int(input("\nID del vehiculo a eliminar: ")) - 1
+        if 0 <= id_vehiculo < len(estados):
+            print(f"\nADVERTENCIA: Va a eliminar {placas[id_vehiculo]} - {marcas[id_vehiculo]} {modelos[id_vehiculo]}")
+            confirmar = input("Esta seguro? (s/n): ")
+            if confirmar.lower() == "s":
+                placas.pop(id_vehiculo)
+                marcas.pop(id_vehiculo)
+                modelos.pop(id_vehiculo)
+                estados.pop(id_vehiculo)
+                print("VEHICULO ELIMINADO EXITOSAMENTE")
+            else:
+                print("Eliminacion cancelada")
+        else:
+            print("ERROR: ID no existe")
+    except ValueError:
+        print("ERROR: Ingrese un numero valido")
+    
+    input("\nPresione Enter para continuar...")
+
 def main():
     placas = ["P123-ABC", "P456-DEF", "P789-GHI", "P999-JKL", "P111-MNO"]
     marcas = ["Toyota", "Honda", "Nissan", "Mazda", "Kia"]
@@ -183,11 +218,13 @@ def main():
             mantenimiento_vehiculo(placas, marcas, modelos, estados)
         elif opcion == "5":
             agregar_vehiculo(placas, marcas, modelos, estados)
+        elif opcion == "6":
+            eliminar_vehiculo(placas, marcas, modelos, estados)
         elif opcion == "7":
             print("Saliendo...")
             break
         else:
-            print("Opcion no valida o no implementada aun")
+            print("Opcion no valida")
             input("Presione Enter para continuar...")
 
 if __name__ == "__main__":
