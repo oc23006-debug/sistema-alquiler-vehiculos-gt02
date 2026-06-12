@@ -1,6 +1,6 @@
 # Sistema de Alquiler de Vehiculos - Grupo GT02
 # Integrante: Marco Josue Orellana Cortez
-# Entrega 2 - Python - Parte Final
+# Entrega 3 - Version Final con Modificar y Manejo de Errores
 
 def ver_catalogo(placas, marcas, modelos, estados):
     cont_disp = 0
@@ -27,6 +27,7 @@ def ver_catalogo(placas, marcas, modelos, estados):
     print("")
     input("Presione Enter para continuar...")
 
+
 def agregar_vehiculo(placas, marcas, modelos, estados):
     print("\n========== AGREGAR VEHICULO ==========")
     print("")
@@ -36,9 +37,23 @@ def agregar_vehiculo(placas, marcas, modelos, estados):
         input("Presione Enter para continuar...")
         return
     
-    nueva_placa = input("Placa (formato P123-ABC): ")
-    nueva_marca = input("Marca: ")
-    nuevo_modelo = input("Modelo: ")
+    nueva_placa = input("Placa (formato P123-ABC): ").strip()
+    if not nueva_placa:
+        print("ERROR: La placa no puede estar vacia")
+        input("Presione Enter para continuar...")
+        return
+    
+    nueva_marca = input("Marca: ").strip()
+    if not nueva_marca:
+        print("ERROR: La marca no puede estar vacia")
+        input("Presione Enter para continuar...")
+        return
+    
+    nuevo_modelo = input("Modelo: ").strip()
+    if not nuevo_modelo:
+        print("ERROR: El modelo no puede estar vacio")
+        input("Presione Enter para continuar...")
+        return
     
     for placa in placas:
         if placa.upper() == nueva_placa.upper():
@@ -53,6 +68,7 @@ def agregar_vehiculo(placas, marcas, modelos, estados):
     
     print(f"\nVEHICULO AGREGADO EXITOSAMENTE! {nueva_placa} - {nueva_marca} {nuevo_modelo}")
     input("Presione Enter para continuar...")
+
 
 def reservar_vehiculo(placas, marcas, modelos, estados):
     print("\n========== RESERVAR VEHICULO ==========")
@@ -87,6 +103,7 @@ def reservar_vehiculo(placas, marcas, modelos, estados):
     
     input("\nPresione Enter para continuar...")
 
+
 def devolver_vehiculo(placas, marcas, modelos, estados):
     print("\n========== DEVOLUCION DE VEHICULO ==========")
     print("")
@@ -120,6 +137,7 @@ def devolver_vehiculo(placas, marcas, modelos, estados):
     
     input("\nPresione Enter para continuar...")
 
+
 def mantenimiento_vehiculo(placas, marcas, modelos, estados):
     print("\n========== ENVIAR A MANTENIMIENTO ==========")
     print("")
@@ -152,6 +170,84 @@ def mantenimiento_vehiculo(placas, marcas, modelos, estados):
         print("ERROR: Ingrese un numero valido")
     
     input("\nPresione Enter para continuar...")
+
+
+def modificar_vehiculo(placas, marcas, modelos, estados):
+    print("\n========== MODIFICAR DATOS DE VEHICULO ==========")
+    print("")
+    print("Todos los vehiculos:")
+    print("ID | Placa      | Marca    | Modelo    | Estado")
+    print("-----------------------------------------------")
+    
+    for i in range(len(placas)):
+        print(f"{i+1}   | {placas[i]} | {marcas[i]} | {modelos[i]} | {estados[i]}")
+    
+    if len(placas) == 0:
+        print("No hay vehiculos para modificar")
+        input("Presione Enter para continuar...")
+        return
+    
+    try:
+        id_vehiculo = int(input("\nID del vehiculo a modificar: ")) - 1
+        if 0 <= id_vehiculo < len(estados):
+            print(f"\nModificando: {placas[id_vehiculo]} - {marcas[id_vehiculo]} {modelos[id_vehiculo]}")
+            print("Que dato desea modificar?")
+            print("1. Placa")
+            print("2. Marca")
+            print("3. Modelo")
+            print("4. Estado (Disponible, Alquilado, Mantenimiento)")
+            opcion_mod = input("Opcion: ")
+            
+            if opcion_mod == "1":
+                nueva_placa = input("Nueva placa: ").strip()
+                if nueva_placa:
+                    # Verificar que la nueva placa no exista en otro vehiculo
+                    existe = False
+                    for j in range(len(placas)):
+                        if j != id_vehiculo and placas[j].upper() == nueva_placa.upper():
+                            existe = True
+                            break
+                    if existe:
+                        print("ERROR: Ya existe otro vehiculo con esa placa")
+                    else:
+                        placas[id_vehiculo] = nueva_placa
+                        print("Placa actualizada exitosamente")
+                else:
+                    print("ERROR: La placa no puede estar vacia")
+                    
+            elif opcion_mod == "2":
+                nueva_marca = input("Nueva marca: ").strip()
+                if nueva_marca:
+                    marcas[id_vehiculo] = nueva_marca
+                    print("Marca actualizada exitosamente")
+                else:
+                    print("ERROR: La marca no puede estar vacia")
+                    
+            elif opcion_mod == "3":
+                nuevo_modelo = input("Nuevo modelo: ").strip()
+                if nuevo_modelo:
+                    modelos[id_vehiculo] = nuevo_modelo
+                    print("Modelo actualizado exitosamente")
+                else:
+                    print("ERROR: El modelo no puede estar vacio")
+                    
+            elif opcion_mod == "4":
+                print("Estados permitidos: Disponible, Alquilado, Mantenimiento")
+                nuevo_estado = input("Nuevo estado: ").strip().capitalize()
+                if nuevo_estado in ["Disponible", "Alquilado", "Mantenimiento"]:
+                    estados[id_vehiculo] = nuevo_estado
+                    print("Estado actualizado exitosamente")
+                else:
+                    print("ERROR: Estado no valido")
+            else:
+                print("Opcion no valida")
+        else:
+            print("ERROR: ID no existe")
+    except ValueError:
+        print("ERROR: Ingrese un numero valido")
+    
+    input("\nPresione Enter para continuar...")
+
 
 def eliminar_vehiculo(placas, marcas, modelos, estados):
     print("\n========== ELIMINAR VEHICULO ==========")
@@ -188,7 +284,9 @@ def eliminar_vehiculo(placas, marcas, modelos, estados):
     
     input("\nPresione Enter para continuar...")
 
+
 def main():
+    # Datos iniciales
     placas = ["P123-ABC", "P456-DEF", "P789-GHI", "P999-JKL", "P111-MNO"]
     marcas = ["Toyota", "Honda", "Nissan", "Mazda", "Kia"]
     modelos = ["Corolla", "Civic", "Sentra", "3", "Rio"]
@@ -203,8 +301,9 @@ def main():
         print("3. Devolver vehiculo")
         print("4. Enviar a mantenimiento")
         print("5. Agregar vehiculo")
-        print("6. Eliminar vehiculo")
-        print("7. Salir")
+        print("6. Modificar datos de vehiculo")
+        print("7. Eliminar vehiculo")
+        print("8. Salir")
         print("=====================================")
         opcion = input("Opcion: ")
         
@@ -219,13 +318,16 @@ def main():
         elif opcion == "5":
             agregar_vehiculo(placas, marcas, modelos, estados)
         elif opcion == "6":
-            eliminar_vehiculo(placas, marcas, modelos, estados)
+            modificar_vehiculo(placas, marcas, modelos, estados)
         elif opcion == "7":
-            print("Saliendo...")
+            eliminar_vehiculo(placas, marcas, modelos, estados)
+        elif opcion == "8":
+            print("Saliendo del sistema...")
             break
         else:
-            print("Opcion no valida")
+            print("Opcion no valida. Intente nuevamente")
             input("Presione Enter para continuar...")
+
 
 if __name__ == "__main__":
     main()
